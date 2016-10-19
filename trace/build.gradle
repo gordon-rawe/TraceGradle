@@ -1,9 +1,11 @@
 apply plugin: 'groovy'
 apply plugin: 'maven'
+apply from: "./bintary.gradle"
 
 dependencies {
     compile gradleApi()
     compile localGroovy()
+
 }
 
 repositories {

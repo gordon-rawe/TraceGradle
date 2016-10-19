@@ -12,6 +12,10 @@ public class TracePlugin implements Plugin<Project> {
     @Override
     void apply(Project project) {
         project.extensions.create("traceExt", TraceExtension)
+
+        /**
+         * notice that extension params can be only acquired after evaluation...
+         * */
         project.afterEvaluate {
             def extension = project.extensions.findByName("traceExt") as TraceExtension
             println "" + extension.eachEnabled + extension.resultEnabled + extension.thresholdTime

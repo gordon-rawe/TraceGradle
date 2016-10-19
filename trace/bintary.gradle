@@ -1,0 +1,98 @@
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'maven-publish'
+
+/**
+ * Configuration area
+ * */
+def projectName = "trace"
+def mavenDesc = "This is a android gradle plugin written in groovy to trace every task's input and output files, which can be useful for us to understand the android build architecture."
+def baseUrl = 'https://github.com/gordon-rawe'
+def siteUrl = baseUrl
+def gitUrl = "${baseUrl}/TraceGradle"
+def issueUrl = "${baseUrl}/TraceGradle"
+
+def licenseIds = ['Apache-2.0']
+def licenseNames = ['The Apache Software License, Version 2.0']
+def licenseUrls = ['http://www.apache.org/licenses/LICENSE-2.0.txt']
+def inception = '2016'
+
+def username = 'gordon-rawe'
+
+install {
+    repositories {
+        mavenInstaller {
+            pom.project {
+                // Description
+                name projectName
+                description mavenDesc
+                url siteUrl
+
+                // Archive
+                groupId project.group
+                artifactId archivesBaseName
+                version project.version
+
+                // License
+                inceptionYear inception
+                licenses {
+                    licenseNames.eachWithIndex { ln, li ->
+                        license {
+                            name ln
+                            url licenseUrls[li]
+                        }
+                    }
+                }
+                developers {
+                    developer {
+                        name username
+                    }
+                }
+                scm {
+                    connection gitUrl
+                    developerConnection gitUrl
+                    url siteUrl
+                }
+            }
+        }
+    }
+}
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allGroovy
+    classifier = 'sources'
+}
+
+
+task javadocJar(type: Jar, dependsOn: groovydoc) {
+    from groovydoc.destinationDir
+    classifier = 'javadoc'
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
+
+
+bintray {
+//    Properties properties = new Properties()
+//    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+    user = "gordon-rawe"
+    key = "bdb7c87e73f4274b0907785435a019923ac62057"
+//    user = BINTRAY_USER
+//    key = BINTRAY_KEY
+    configurations = ['archives']
+    pkg {
+        repo = 'maven'
+        name = projectName
+        desc = mavenDesc
+        websiteUrl = siteUrl
+        issueTrackerUrl = issueUrl
+        vcsUrl = gitUrl
+        labels = ['gradle', 'plugin', 'stastics', 'trace time']
+        licenses = licenseIds
+        publish = true
+        publicDownloadNumbers = true
+    }
+}
