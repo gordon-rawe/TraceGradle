@@ -2,11 +2,11 @@
 <metadata>
   <groupId>com.gordon.rawe</groupId>
   <artifactId>trace</artifactId>
+  <version>1.0.0-alpha</version>
   <versioning>
-    <release>1.0.0</release>
     <versions>
-      <version>1.0.0</version>
+      <version>1.0.0-alpha</version>
     </versions>
-    <lastUpdated>20161018154655</lastUpdated>
+    <lastUpdated>20161019071629</lastUpdated>
   </versioning>
 </metadata>

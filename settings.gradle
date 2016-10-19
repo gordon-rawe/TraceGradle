@@ -1,1 +1,1 @@
-include ':trace'//,':app'
+include ':trace',':app'

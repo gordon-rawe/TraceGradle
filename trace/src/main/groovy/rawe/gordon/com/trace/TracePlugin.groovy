@@ -25,7 +25,9 @@ public class TracePlugin implements Plugin<Project> {
                     extension.thresholdTime
             ))
             project.task("showConfiguration") << {
-                println extension.eachEnabled + extension.resultEnabled + extension.thresholdTime
+                println "show time for every  task: " + extension.eachEnabled.toString()
+                println "show tasks over threshold: " + extension.resultEnabled.toString()
+                println "threshold     time    set: " + extension.thresholdTime.toString()
             }
         }
 

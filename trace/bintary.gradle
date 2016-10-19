@@ -20,7 +20,7 @@ def username = 'gordon-rawe'
 
 def group = "com.gordon.rawe"
 def artifact = "trace"
-def versionId = "1.0.0"
+def versionId = "1.0.0-alpha"
 
 install {
     repositories {
