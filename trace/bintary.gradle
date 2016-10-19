@@ -18,6 +18,10 @@ def inception = '2016'
 
 def username = 'gordon-rawe'
 
+def group = "com.gordon.rawe"
+def artifact = "trace"
+def versionId = "1.0.0"
+
 install {
     repositories {
         mavenInstaller {
@@ -28,9 +32,9 @@ install {
                 url siteUrl
 
                 // Archive
-                groupId project.group
-                artifactId archivesBaseName
-                version project.version
+                groupId group
+                artifactId artifact
+                version versionId
 
                 // License
                 inceptionYear inception
