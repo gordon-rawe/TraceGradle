@@ -20,41 +20,41 @@ def username = 'gordon-rawe'
 
 def group = "com.gordon.rawe"
 def artifact = "trace"
-def versionId = "1.0.0-alpha"
+def versionId = "1.0.0-beta"
 
 install {
     repositories {
         mavenInstaller {
             pom.project {
                 // Description
-                name projectName
-                description mavenDesc
-                url siteUrl
+                name = projectName
+                description = mavenDesc
+                url = siteUrl
 
                 // Archive
-                groupId group
-                artifactId artifact
-                version versionId
+                groupId = group
+                artifactId = artifact
+                version = versionId
 
                 // License
-                inceptionYear inception
+                inceptionYear = inception
                 licenses {
                     licenseNames.eachWithIndex { ln, li ->
                         license {
-                            name ln
-                            url licenseUrls[li]
+                            name = ln
+                            url = licenseUrls[li]
                         }
                     }
                 }
                 developers {
                     developer {
-                        name username
+                        name = username
                     }
                 }
                 scm {
-                    connection gitUrl
-                    developerConnection gitUrl
-                    url siteUrl
+                    connection = gitUrl
+                    developerConnection = gitUrl
+                    url = siteUrl
                 }
             }
         }
@@ -68,24 +68,17 @@ task sourcesJar(type: Jar) {
 
 
 task javadocJar(type: Jar, dependsOn: groovydoc) {
-    from groovydoc.destinationDir
+    from groovydoc.getDestinationDir()
     classifier = 'javadoc'
 }
 
 artifacts {
-    archives javadocJar, sourcesJar
+    archives javadocJar,sourcesJar
 }
 
-
-
 bintray {
-//    Properties properties = new Properties()
-//    properties.load(project.rootProject.file('local.properties').newDataInputStream())
-
     user = "gordon-rawe"
     key = "bdb7c87e73f4274b0907785435a019923ac62057"
-//    user = BINTRAY_USER
-//    key = BINTRAY_KEY
     configurations = ['archives']
     pkg {
         repo = 'maven'

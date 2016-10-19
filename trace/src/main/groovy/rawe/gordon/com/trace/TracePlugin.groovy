@@ -18,7 +18,6 @@ public class TracePlugin implements Plugin<Project> {
          * */
         project.afterEvaluate {
             def extension = project.extensions.findByName("traceExt") as TraceExtension
-            println "" + extension.eachEnabled + extension.resultEnabled + extension.thresholdTime
             project.gradle.addListener(new TraceListener(
                     extension.eachEnabled,
                     extension.resultEnabled,
