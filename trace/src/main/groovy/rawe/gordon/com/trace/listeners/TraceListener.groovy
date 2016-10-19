@@ -19,11 +19,19 @@ public class TraceListener implements TaskExecutionListener, BuildListener {
     private boolean eachEnabled
     private boolean resultEnabled
     private long thresholdTime
+    private boolean traceInput
+    private boolean traceOutput
 
-    public TraceListener(boolean eachEnabled, boolean resultEnabled, long thresholdTime) {
+    public TraceListener(boolean eachEnabled
+                         , boolean resultEnabled
+                         , boolean traceInput
+                         , boolean traceOutput
+                         , long thresholdTime) {
         this.eachEnabled = eachEnabled
         this.resultEnabled = resultEnabled
         this.thresholdTime = thresholdTime
+        this.traceInput = traceInput
+        this.traceOutput = traceOutput
     }
 
 
@@ -72,5 +80,25 @@ public class TraceListener implements TaskExecutionListener, BuildListener {
         def ms = clock.timeInMs
         times.add([ms, task.path])
         if (eachEnabled) task.project.logger.warn "${task.path} spend ${ms}ms"
+        Set<File> files
+        if (traceInput) {
+            println "=======================   ${task.name} Input Files  ======================="
+            files = task.inputs.files.files
+            files.each {
+                file ->
+                    println file.getAbsoluteFile()
+            }
+            println "=======================   ${task.name} end   ======================="
+        }
+        if (traceOutput) {
+            files = task.outputs.files.files
+            println "=======================   ${task.name} Output Files  ======================="
+            files.each {
+                file ->
+                    println file.getAbsoluteFile()
+            }
+            println "=======================   ${task.name} end   ======================="
+        }
+
     }
 }

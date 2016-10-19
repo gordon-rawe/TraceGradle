@@ -6,5 +6,7 @@ package rawe.gordon.com.trace.extensions
 public class TraceExtension {
     def eachEnabled = true
     def resultEnabled = true
+    def traceInput = true
+    def traceOutput = true
     def thresholdTime = 50
 }

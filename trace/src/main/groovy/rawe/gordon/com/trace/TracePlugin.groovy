@@ -21,8 +21,11 @@ public class TracePlugin implements Plugin<Project> {
             project.gradle.addListener(new TraceListener(
                     extension.eachEnabled,
                     extension.resultEnabled,
+                    extension.traceInput,
+                    extension.traceOutput,
                     extension.thresholdTime
             ))
+
             project.task("showConfiguration") << {
                 println "show time for every  task: " + extension.eachEnabled.toString()
                 println "show tasks over threshold: " + extension.resultEnabled.toString()
